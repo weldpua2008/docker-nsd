@@ -1,4 +1,5 @@
 #!/bin/bash
+# weldpua2008@gmail.com
 
 PID_PATH="/var/run/nsd3/nsd.pid"
 NS_DB="/var/lib/nsd3/nsd.db"
