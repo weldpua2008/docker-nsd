@@ -7,9 +7,28 @@ RUN echo "===> Updating cache..." && \
     \
     \
     echo "===> Installing nsd3..."  && \
-    apt-get install -y  nsd3 && \
+    apt-get install -y -o Dpkg::Options::="--force-confold" --force-yes  nsd3 openssl && \
     \
     \
-    apt-get clean
+    apt-get clean && \
+    \
+    \
+    rm -f /etc/nsd3/nsd.conf && \
+    mkdir -p /var/run/nsd3
+    #&& \
+    #zonec -c /etc/nsd3/nsd.conf
 
-CMD ["/bin/bash"]
+
+# Volumes
+# /etc/nsd3 : configuration and zone files
+# /var/log/nsd : log files
+VOLUME ["/etc/nsd3", "/var/log/nsd"]
+
+EXPOSE 53/udp 53/tcp
+
+
+#CMD ["nsd", "-d"]
+
+
+COPY docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
