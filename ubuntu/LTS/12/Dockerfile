@@ -14,6 +14,7 @@ RUN echo "===> Updating cache..." && \
     \
     \
     rm -f /etc/nsd3/nsd.conf && \
+    touch /etc/nsd3/nsd.conf && \
     mkdir -p /var/run/nsd3
     #&& \
     #zonec -c /etc/nsd3/nsd.conf
@@ -25,7 +26,6 @@ RUN echo "===> Updating cache..." && \
 VOLUME ["/etc/nsd3", "/var/log/nsd"]
 
 EXPOSE 53/udp 53/tcp
-
 
 #CMD ["nsd", "-d"]
 
